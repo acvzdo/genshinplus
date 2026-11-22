@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="includes/images/a2.png">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Personajes - Genshin +</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="includes/styles.css" rel="stylesheet">
+  <script src="includes/api.js"></script>
+  <script src="includes/scripts.js"></script>
+  <script src="includes/plan.js"></script>
+</head>
+<body data-page="personajes">
+  <nav class="navbar navbar-expand-sm mb-4">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">
+        <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2l2.6 6.4L21 11l-6.4 2.6L12 20l-2.6-6.4L3 11l6.4-2.6z"/></svg>
+        Genshin +
+      </a>
+      <div class="navbar-nav flex-row gap-1">
+        <a class="nav-link" href="index.html">Inicio</a>
+        <a class="nav-link" href="personajes.html">Personajes</a>
+        <a class="nav-link" href="tracker.html">Tracker</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h1 class="display-title mb-4">Personajes</h1>
+
+    <div class="sheet">
+    <section class="tile mb-3" aria-label="Filtros">
+      <div class="row g-3">
+        <div class="col-12">
+          <label for="search" class="tile-eyebrow mb-1">Buscar</label>
+          <input id="search" type="search" class="form-control" placeholder="Nombre del personaje" autocomplete="off">
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="tile-eyebrow mb-1" id="lbl-el">Elemento</div>
+          <div id="f-element" class="chip-group" role="group" aria-labelledby="lbl-el"></div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="tile-eyebrow mb-1" id="lbl-wp">Arma</div>
+          <div id="f-weapon" class="chip-group" role="group" aria-labelledby="lbl-wp"></div>
+        </div>
+        <div class="col-12 col-md-2">
+          <div class="tile-eyebrow mb-1" id="lbl-st">Estrellas</div>
+          <div id="f-stars" class="chip-group" role="group" aria-labelledby="lbl-st"></div>
+        </div>
+        <div class="col-12 col-md-6">
+          <label for="sort" class="tile-eyebrow mb-1">Ordenar por</label>
+          <select id="sort" class="form-select">
+            <option value="name">Nombre</option>
+            <option value="stars">Estrellas (5★ primero)</option>
+            <option value="element">Elemento</option>
+            <option value="version">Más recientes</option>
+          </select>
+        </div>
+        <div class="col-12 col-md-6 d-flex align-items-end">
+          <button type="button" class="chip" id="f-fav" aria-pressed="false">♥ Solo favoritos</button>
+        </div>
+      </div>
+    </section>
+
+    <p class="muted small mb-1" id="catalog-status" aria-live="polite"></p>
+    <p class="muted small" id="result-count" aria-live="polite"></p>
+    <div id="catalog" class="bento-catalog"></div>
+    </div>
+  </main>
+</body>
+</html>

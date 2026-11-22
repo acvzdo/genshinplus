@@ -1,0 +1,14 @@
+# Respaldos de progreso exportados (contienen tus planes)
+genshin-plus-*.json
+
+# Secretos y entornos
+.env
+*.key
+*.pem
+
+# Sistema y editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+node_modules/

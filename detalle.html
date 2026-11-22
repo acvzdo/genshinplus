@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="includes/images/a2.png">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Personaje - Genshin +</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="includes/styles.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.5/dist/sweetalert2.all.min.js"></script>
+  <script src="includes/api.js"></script>
+  <script src="includes/scripts.js"></script>
+  <script src="includes/plan.js"></script>
+  <script src="includes/extras.js"></script>
+  <script src="includes/jefes.js"></script>
+  <script src="includes/detalle.js"></script>
+</head>
+<body data-page="detalle">
+  <nav class="navbar navbar-expand-sm mb-4">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">
+        <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2l2.6 6.4L21 11l-6.4 2.6L12 20l-2.6-6.4L3 11l6.4-2.6z"/></svg>
+        Genshin +
+      </a>
+      <div class="navbar-nav flex-row gap-1">
+        <a class="nav-link" href="index.html">Inicio</a>
+        <a class="nav-link" href="personajes.html">Personajes</a>
+        <a class="nav-link" href="tracker.html">Tracker</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <a href="personajes.html" class="muted small text-decoration-none">&larr; Volver al catálogo</a>
+    <h1 class="display-title mt-1 mb-4" id="char-title">Cargando...</h1>
+    <div class="hero-line d-flex align-items-center gap-3 mb-2">
+      <span class="tile-eyebrow mb-0" id="hero-meta"></span>
+      <span class="hero-stars" id="hero-stars"></span>
+      <span class="hud-name" id="hero-name" hidden></span>
+    </div>
+    <p id="load-note" class="muted small" aria-live="polite"></p>
+
+    <div class="hud">
+
+      <section class="tile hud-char" id="hero" aria-label="Personaje y nivel objetivo">
+        <div class="hud-art" id="hero-img-wrap"></div>
+      </section>
+
+      <section class="tile tile--amber hud-mora" id="mora-tile" aria-labelledby="mora-title">
+        <div class="d-flex align-items-center gap-2">
+          <span id="mora-icon"></span>
+          <h2 class="tile-title mb-0" id="mora-title">Mora</h2>
+        </div>
+        <dl class="mora-list mb-0" id="mora-list"><dt>Calculando...</dt><dd></dd></dl>
+        <button type="button" class="tile-toggle" id="mora-toggle" data-k="mora" hidden>✓ Ya tengo la Mora</button>
+      </section>
+
+      <section class="tile tile--dark hud-xp" id="xp-tile" aria-labelledby="xp-title">
+        <h2 class="tile-title" id="xp-title">Libros de EXP</h2>
+        <div class="level-box">
+          <div class="tile-eyebrow mb-2">Nivel objetivo (desde el 1)</div>
+          <div class="d-flex align-items-center flex-wrap gap-2">
+            <div class="chip-group" role="group" aria-label="Objetivos rápidos">
+              <button type="button" class="chip" data-tgt="70" aria-pressed="false">70</button>
+              <button type="button" class="chip" data-tgt="80" aria-pressed="false">80</button>
+              <button type="button" class="chip" data-tgt="90" aria-pressed="false">90</button>
+            </div>
+            <label class="field d-flex align-items-center gap-2 mb-0"><span class="field-label">Otro (1 a 90)</span>
+              <input id="lvl-tgt" type="number" min="1" max="90" class="form-control" inputmode="numeric" placeholder="0"></label>
+          </div>
+        </div>
+        <div id="xp-box" class="d-flex align-items-center gap-3"></div>
+        <div>
+          <p class="small mb-1" id="xp-note"></p>
+          <button type="button" class="tile-toggle" id="xp-toggle" data-k="xp" hidden>✓ Ya tengo los libros</button>
+        </div>
+      </section>
+
+      <section class="tile tile--coral hud-asc" aria-labelledby="asc-title">
+        <h2 class="tile-title" id="asc-title">Materiales de ascensión</h2>
+        <div class="materials-grid" id="asc-grid"><p class="tile-note mb-0">Cargando...</p></div>
+      </section>
+
+      <section class="tile hud-prio" id="talents-tile" aria-labelledby="talents-title">
+        <div>
+          <h2 class="tile-title" id="talents-title">Prioridad de talentos</h2>
+          <p class="muted small mb-0">Ordénalos con las flechas, marca los que quieras subir y elige el nivel.</p>
+        </div>
+        <div id="talent-rows"></div>
+      </section>
+
+      <section class="tile tile--send hud-send" aria-labelledby="send-title">
+        <div>
+          <h2 class="tile-title" id="send-title">Tu plan</h2>
+          <div class="send-pct" id="send-pct">0%</div>
+          <p class="small mb-0" id="send-count"></p>
+          <p class="muted small mb-1 mt-2" id="send-resin" hidden></p>
+          <div class="progress mt-2" id="send-bar-wrap" role="progressbar" aria-label="Progreso del plan" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><div class="progress-bar" id="send-bar" style="width:0%"></div></div>
+        </div>
+        <div>
+          <div class="d-flex gap-2 flex-wrap mt-3">
+            <button type="button" class="btn-light-pill" id="btn-send">Enviar al tracker</button>
+            <button type="button" class="btn-outline-pill" id="btn-unsend" hidden>Quitar del tracker</button>
+            <button type="button" class="btn-outline-pill" id="btn-reset">Reiniciar selecciones</button>
+          </div>
+          <p class="small mb-0 mt-2" id="send-msg" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="tile hud-weekly" aria-labelledby="weekly-title">
+        <h2 class="tile-eyebrow" id="weekly-title">Jefe semanal (talentos)</h2>
+        <div class="boss-info" id="weekly-info" aria-live="polite"></div>
+        <div class="materials-grid single" id="weekly-grid"><p class="tile-note mb-0">Cargando...</p></div>
+      </section>
+
+      <section class="tile hud-boss" aria-labelledby="boss-title">
+        <h2 class="tile-eyebrow" id="boss-title">Jefe de mundo (ascensión)</h2>
+        <div class="boss-info" id="boss-info" aria-live="polite"></div>
+        <div class="materials-grid single" id="boss-grid"><p class="tile-note mb-0">Cargando...</p></div>
+      </section>
+
+      <section class="tile tile--blue hud-tal" aria-labelledby="tal-title">
+        <div>
+          <h2 class="tile-title" id="tal-title">Mejora de talentos</h2>
+          <p class="small mb-0">Materiales de los talentos que marcaste.</p>
+        </div>
+        <div class="materials-grid" id="tal-grid"><p class="tile-note mb-0">Cargando...</p></div>
+        <div id="crown-box" hidden>
+          <h3 class="tile-eyebrow mb-1">Corona de la sabiduría</h3>
+          <div class="materials-grid single" id="crown-grid"></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</body>
+</html>
