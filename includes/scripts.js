@@ -1,4 +1,3 @@
-
 window.ph = function (w, h, t) {
   const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}'>` +
     `<rect width='100%' height='100%' fill='#EFEFEF'/>` +
@@ -41,7 +40,7 @@ window.ph = function (w, h, t) {
   }
 
   const LEAK = {
-    anastasya: { book: [104365, 'del amor'], gem: [104161, 'Jade shivada'], local: [101275, 'Flor frigifeérica'], mob: [[112149, 'Semilla quimérica'], [112150, 'Célula quimérica simbiótica'], [112151, 'Organismo quimérico primigenio']], boss: [990002, 'Ancla estabilizadora rota', true], weekly: [990004, '???', true] },
+    anastasya: { book: [104365, 'del amor'], gem: [104161, 'Jade shivada'], local: [990005, 'Artemisia feérica'], mob: [[112149, 'Semilla quimérica'], [112150, 'Célula quimérica simbiótica'], [112151, 'Organismo quimérico primigenio']], boss: [990002, 'Ancla estabilizadora rota', true], weekly: [990004, '???', true] },
     danica: { book: [104371, 'de la gloria'], gem: [104141, 'Amatista vajrada'], local: [101276, 'Hierbalana'], mob: [[112146, 'Lumiesquirla etérea'], [112147, 'Quebracristal etéreo'], [112148, 'Petreoescama etérea']], boss: [990003, '???', true], weekly: [113088, 'Rama marchita retorcida', true] }
   };
   const localBoss = { 990002: 'Anclamareas', 990003: '???', 990004: '???' };
