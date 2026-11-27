@@ -910,3 +910,9 @@ html[data-theme="dark"] body[data-page="detalle"] .hud .mat-card.is-done { backg
 html[data-theme="dark"] body[data-page="detalle"] .hud .mat-card.is-done .tick { background: #fff !important; color: #1B5E20 !important; }
 html[data-theme="dark"] body[data-page="detalle"] .hud .mat-card:not(.is-done) .tick { background: #475569; color: #CBD5E1; }
 html[data-theme="dark"] :is(body[data-page="tracker"]) .mat-card.is-done { border: 2px solid #81C784; }
+
+.nav-img { width: 22px; height: 22px; object-fit: contain; flex: none; transition: opacity 200ms ease, transform 200ms ease; }
+.nav-img.swap { opacity: 0; transform: scale(0.8); }
+.quick-ico:has(img) { background: transparent !important; }
+.quick-ico img { width: 44px; height: 44px; object-fit: contain; border-radius: 8px; }
+@media (prefers-reduced-motion: reduce) { .nav-img { transition: none; } }
