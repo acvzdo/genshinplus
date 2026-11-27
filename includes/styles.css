@@ -134,7 +134,7 @@ textarea.form-control { resize: vertical; min-height: 140px; }
 .goal-row .progress { flex: 1; }
 
 .char-top { display: flex; align-items: center; gap: 1.25rem; }
-.plan-portrait { flex: none; width: 120px; height: 120px; border-radius: 50%; overflow: hidden; background: rgba(255, 255, 255, 0.7); border: 3px solid rgba(255, 255, 255, 0.95); box-shadow: 0 6px 20px rgba(49, 46, 129, 0.18); }
+.plan-portrait { flex: none; width: 104px; height: 104px; border-radius: 50%; overflow: hidden; background: rgba(255, 255, 255, 0.7); border: 3px solid rgba(255, 255, 255, 0.95); box-shadow: 0 6px 20px rgba(49, 46, 129, 0.18); }
 .plan-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .char-info { display: flex; flex-direction: column; gap: 0.3rem; min-width: 0; }
 .char-info .tile-eyebrow { color: var(--el-dark); }
@@ -916,3 +916,9 @@ html[data-theme="dark"] :is(body[data-page="tracker"]) .mat-card.is-done { borde
 .quick-ico:has(img) { background: transparent !important; }
 .quick-ico img { width: 44px; height: 44px; object-fit: contain; border-radius: 8px; }
 @media (prefers-reduced-motion: reduce) { .nav-img { transition: none; } }
+
+a.tile:has(.quick-ico img) { flex-direction: row; align-items: center; justify-content: flex-start; gap: 1rem; padding: 0.9rem 1.1rem; min-height: 140px; }
+a.tile:has(.quick-ico img) .quick-ico { width: 104px; height: 104px; flex: none; }
+a.tile:has(.quick-ico img) .quick-ico img { width: 104px; height: 104px; border-radius: 0; }
+a.tile:has(.quick-ico img) .tile-title { font-size: 1.3rem; }
+@media (max-width: 576px) { a.tile:has(.quick-ico img) .quick-ico, a.tile:has(.quick-ico img) .quick-ico img { width: 88px; height: 88px; } }
