@@ -187,12 +187,14 @@ window.ph = function (w, h, t) {
     if (!nav) return;
     let here = (location.pathname.split('/').pop() || 'index.html');
     if (here === 'detalle.html') here = 'personajes.html';
-    const ic = d => `<svg class="nav-ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+    const API = window.GenshinAPI;
+    const mi = (id, cls, extra) => API.imgHtml(API.materialIconSources(id).concat(extra || []), 'nav-img ' + (cls || ''), '', 22, 22);
+    const BOOKS = [104373, 104365, 104321, 104372, 104327, 104364];
     const links = [
-      ['index.html', 'Inicio', ic('<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>')],
-      ['personajes.html', 'Personajes', ic('<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.6 2.7-6 6-6s6 2.4 6 6"/><circle cx="17" cy="9" r="2.4"/><path d="M17 14c2.6 0 4.5 1.8 4.5 4.6"/>')],
-      ['hoy.html', 'Hoy', ic('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>')],
-      ['tracker.html', 'Tracker', ic('<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 9l2 2 3.5-4"/><path d="M8 16h8"/>')]
+      ['index.html', 'Inicio', mi(202)],
+      ['personajes.html', 'Personajes', mi(201)],
+      ['hoy.html', 'Hoy', mi(BOOKS[0], 'nav-rot')],
+      ['tracker.html', 'Tracker', mi(220007, '', ['includes/images/resina.webp'])]
     ];
     let n = 0;
     try { n = window.Plan ? window.Plan.tracked().length : 0; } catch (e) { n = 0; }
@@ -209,6 +211,19 @@ window.ph = function (w, h, t) {
       </div>`;
     const tb = document.getElementById('theme-toggle');
     if (tb) tb.addEventListener('click', toggleTheme);
+    const rot = nav.querySelector('.nav-rot');
+    if (rot) {
+      let i = 0;
+      setInterval(() => {
+        i = (i + 1) % BOOKS.length;
+        rot.classList.add('swap');
+        setTimeout(() => {
+          rot.dataset.srcs = JSON.stringify(API.materialIconSources(BOOKS[i]).slice(1));
+          rot.src = API.materialIconSources(BOOKS[i])[0];
+          rot.classList.remove('swap');
+        }, 200);
+      }, 2500);
+    }
   }
 
   function initIndex() {
