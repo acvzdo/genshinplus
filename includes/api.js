@@ -242,7 +242,7 @@
     const img = (data && data.images) || {};
     if (img.filename_icon) out.push(...cdnUrls(img.filename_icon));
     out.push(...cdnUrls(`UI_ItemIcon_${id}`));
-    const own = { 990002: 'bana', 990003: 'bdanica', 990004: 'b2ana' }[id];
+    const own = { 990002: 'bana', 990003: 'bdanica', 990004: 'b2ana', 990005: 'fa' }[id];
     if (own) out.push(`includes/images/${own}.png`);
     return out;
   }
